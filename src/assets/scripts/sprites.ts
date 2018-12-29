@@ -58,7 +58,7 @@ export function loadSprites(sprites: GameSprites<string>): Promise<GameSprites<H
 
       image.onload = () => {
         loadedImages[spriteName] = image;
-        if (++loaded === totalImages - 1) resolve(loadedImages);
+        if (++loaded === totalImages) resolve(loadedImages);
       }
 
       image.src = sprites[spriteName];

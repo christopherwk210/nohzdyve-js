@@ -6,16 +6,26 @@ import { createWall, drawWalls } from './walls';
 
 // State handlers
 import { handleStateTitle } from './states/title';
+import { handleStateWindowExit } from './states/window-exit';
 
 let game: GameController = {
   sprites: null,
   state: GameStates.TITLE,
-  vars: {
-    startGameVisible: true,
+  vars: {    
     frameCount: 0,
     height: 0,
+
     leftWalls: [],
-    rightWalls: []
+    rightWalls: [],
+
+    playerX: 0,
+    playerY: 138,
+
+    // Title state vars
+    startGameVisible: true,
+
+    // Window exit vars
+    logoOpacity: 1
   }
 };
 
@@ -34,6 +44,18 @@ async function startGame() {
     createWall()
   );
 
+  window.addEventListener('keydown', e => {
+    switch (e.key) {
+      case ' ':
+        if (game.state === GameStates.TITLE) game.state = GameStates.WINDOW_EXIT;
+        break;
+      case 'o':
+        break;
+      case 'p':
+        break;
+    }
+  })
+
   gameLoop();
 }
 
@@ -44,10 +66,13 @@ function gameLoop() {
     case GameStates.TITLE:
       handleStateTitle(game, canvas, ctx);
       break;
+    case GameStates.WINDOW_EXIT:
+      handleStateWindowExit(game, canvas, ctx);
+      break;
   }
 
-  drawWalls(game.vars.height, game.vars.leftWalls, canvas, ctx, true, game.sprites);
-  drawWalls(game.vars.height, game.vars.rightWalls, canvas, ctx, false, game.sprites);
+  drawWalls(game.vars.height, game.vars.leftWalls, canvas, ctx, true, game);
+  drawWalls(game.vars.height, game.vars.rightWalls, canvas, ctx, false, game);
 
   game.vars.frameCount++;
   requestAnimationFrame(gameLoop);
