@@ -53,7 +53,7 @@ export function drawWalls(height: number, walls: Wall[], canvas: HTMLCanvasEleme
     if (wall.hasWindow && height !== 0) {
       const frameWidth = 24;
       const frameHeight = 22;
-      const frame = height > 50 ? 1 : 0;
+      const frame = (height > 10 ? 1 : 0) * frameWidth;
       const unit_ypos = wall.positionTop ? 54 : 138;
 
       ctx.drawImage(

@@ -18,7 +18,7 @@ let game: GameController = {
     leftWalls: [],
     rightWalls: [],
 
-    playerX: 0,
+    playerX: 20,
     playerY: 138,
 
     // Title state vars
