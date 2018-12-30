@@ -32,10 +32,12 @@ export function drawWalls(height: number, walls: Wall[], canvas: HTMLCanvasEleme
 
     if (wall.hasFlower) {
       const flower_ypos = (wall.positionTop ? 77 : 161) - 13;
-      const flower_x = left ? 21 : canvas.width - 21 - sprites.flower.width;
+      const flower_x = left ? -21 - sprites.flower.width : canvas.width - 21 - sprites.flower.width;
       const flower_y = ypos + flower_ypos;
 
+      if (left) ctx.scale(-1, 1);
       ctx.drawImage(sprites.flower, flower_x, flower_y);
+      if (left) ctx.setTransform(1, 0, 0, 1, 0, 0);
 
       game.vars.flowers.push([ flower_x, flower_y ]);
     }
@@ -46,9 +48,10 @@ export function drawWalls(height: number, walls: Wall[], canvas: HTMLCanvasEleme
       const frame = (Math.floor(game.vars.frameCount / 5) % 4) * frameWidth;
       const unit_ypos = wall.positionTop ? 54 : 138;
 
-      const unit_x = left ? 17 : canvas.width - 17 - frameWidth;
+      const unit_x = left ? -17 - frameWidth : canvas.width - 17 - frameWidth;
       const unit_y = ypos + unit_ypos;
 
+      if (left) ctx.scale(-1, 1);
       ctx.drawImage(
         sprites.fanSheet,
         frame, 0,
@@ -56,6 +59,7 @@ export function drawWalls(height: number, walls: Wall[], canvas: HTMLCanvasEleme
         unit_x, unit_y,
         frameWidth, frameHeight
       );
+      if (left) ctx.setTransform(1, 0, 0, 1, 0, 0);
 
       game.vars.windowUnits.push([ unit_x, unit_y ]);
     }
