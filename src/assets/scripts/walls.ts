@@ -26,6 +26,8 @@ export function drawWalls(height: number, walls: Wall[], canvas: HTMLCanvasEleme
     const wallSprite = left ? sprites.wallLeft : sprites.wallRight;
     const ypos = (-height) + (index * wallSprite.height);
 
+    if (ypos < -wallSprite.height) return;
+
     ctx.drawImage(wallSprite, left ? 0 : canvas.width - wallSprite.width, ypos);
 
     if (wall.hasFlower) {

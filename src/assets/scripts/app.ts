@@ -76,9 +76,6 @@ function gameLoop() {
   }
 
   if (game.vars.height / 161 > game.vars.leftWalls.length - 1) {
-    game.vars.leftWalls.shift();
-    game.vars.rightWalls.shift();
-
     game.vars.leftWalls.push(
       createWall()
     );
