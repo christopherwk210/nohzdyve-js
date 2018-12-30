@@ -7,6 +7,7 @@ import { createWall, drawWalls } from './walls';
 // State handlers
 import { handleStateTitle } from './states/title';
 import { handleStateWindowExit } from './states/window-exit';
+import { handleStateFalling } from './states/falling';
 
 let game: GameController = {
   sprites: null,
@@ -69,6 +70,22 @@ function gameLoop() {
     case GameStates.WINDOW_EXIT:
       handleStateWindowExit(game, canvas, ctx);
       break;
+    case GameStates.FALLING:
+      handleStateFalling(game, canvas, ctx);
+      break;
+  }
+
+  if (game.vars.height / 161 > game.vars.leftWalls.length - 1) {
+    game.vars.leftWalls.shift();
+    game.vars.rightWalls.shift();
+
+    game.vars.leftWalls.push(
+      createWall()
+    );
+
+    game.vars.rightWalls.push(
+      createWall()
+    );
   }
 
   drawWalls(game.vars.height, game.vars.leftWalls, canvas, ctx, true, game);

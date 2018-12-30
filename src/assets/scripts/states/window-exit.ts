@@ -20,6 +20,7 @@ export function handleStateWindowExit(game: GameController, canvas: HTMLCanvasEl
       ctx.drawImage(sprites.dashMarks, game.vars.playerX - sprites.dashMarks.width - 10, game.vars.playerY - game.vars.height + (sprites.playerJump.height / 2));
 
       if (game.vars.playerX > canvas.width / 2) {
+        game.vars.playerY = game.vars.playerY - game.vars.height;
         game.state = GameStates.FALLING;
       }
     }
