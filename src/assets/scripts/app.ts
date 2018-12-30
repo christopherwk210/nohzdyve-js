@@ -26,7 +26,12 @@ let game: GameController = {
     startGameVisible: true,
 
     // Window exit vars
-    logoOpacity: 1
+    logoOpacity: 1,
+
+    // Falling vars
+    hspeed: 0,
+    oDown: false,
+    pDown: false
   }
 };
 
@@ -51,11 +56,24 @@ async function startGame() {
         if (game.state === GameStates.TITLE) game.state = GameStates.WINDOW_EXIT;
         break;
       case 'o':
+        game.vars.oDown = true;
         break;
       case 'p':
+        game.vars.pDown = true;
         break;
     }
-  })
+  });
+
+  window.addEventListener('keyup', e => {
+    switch (e.key) {
+      case 'o':
+        game.vars.oDown = false;
+        break;
+      case 'p':
+        game.vars.pDown = false;
+        break;
+    }
+  });
 
   gameLoop();
 }

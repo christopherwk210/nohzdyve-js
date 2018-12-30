@@ -1,9 +1,24 @@
 import { GameController } from '../game-controller';
+import { options } from '../options';
 
 export function handleStateFalling(game: GameController, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const sprites = game.sprites;
 
   game.vars.height += 2;
+
+  if (game.vars.oDown && !game.vars.pDown) {
+    game.vars.hspeed = -options.moveSpeed;
+  }
+
+  if (game.vars.pDown && !game.vars.oDown) {
+    game.vars.hspeed = options.moveSpeed;
+  }
+
+  if (!game.vars.oDown && !game.vars.pDown) {
+    game.vars.hspeed = options.idleSpeed * Math.sign(game.vars.hspeed);
+  }
+
+  game.vars.playerX += game.vars.hspeed;
 
   const frameWidth = 20;
   const frameHeight = 28;
