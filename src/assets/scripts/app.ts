@@ -22,6 +22,8 @@ let game: GameController = {
     playerX: 20,
     playerY: 138,
 
+    lives: 3,
+
     // Title state vars
     startGameVisible: true,
 
