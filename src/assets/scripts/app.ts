@@ -19,6 +19,9 @@ let game: GameController = {
     leftWalls: [],
     rightWalls: [],
 
+    flowers: [],
+    windowUnits: [],
+
     playerX: 20,
     playerY: 138,
 
@@ -104,6 +107,9 @@ function gameLoop() {
       createWall()
     );
   }
+
+  game.vars.flowers = [];
+  game.vars.windowUnits = [];
 
   drawWalls(game.vars.height, game.vars.leftWalls, canvas, ctx, true, game);
   drawWalls(game.vars.height, game.vars.rightWalls, canvas, ctx, false, game);

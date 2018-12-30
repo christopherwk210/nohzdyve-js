@@ -1,6 +1,7 @@
 import { GameController } from '../game-controller';
 import { options } from '../options';
 import { GameStates } from '../game-states.enum';
+import { boxCollision } from '../collision';
 
 export function handleStateFalling(game: GameController, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const sprites = game.sprites;
@@ -38,8 +39,43 @@ export function handleStateFalling(game: GameController, canvas: HTMLCanvasEleme
   game.vars.playerX += game.vars.hspeed;
 
   // Collide with walls
-  if (game.vars.playerX < game.sprites.wallLeft.width || game.vars.playerX > canvas.width - game.sprites.wallRight.width - frameWidth) {
+  const leighway = 1;
+  if (game.vars.playerX < game.sprites.wallLeft.width - leighway || game.vars.playerX > canvas.width - game.sprites.wallRight.width - frameWidth + leighway) {
     die();
+  }
+
+  // Collide with flowers
+  for (const [ flower_x, flower_y ] of game.vars.flowers) {
+    if (
+      boxCollision(
+        flower_x,
+        flower_y,
+        game.sprites.flower.width,
+        game.sprites.flower.height,
+
+        game.vars.playerX,
+        game.vars.playerY,
+        frameWidth,
+        frameHeight
+      )
+    ) die();
+  }
+
+  // Collide with window units
+  for (const [ unit_x, unit_y ] of game.vars.windowUnits) {
+    if (
+      boxCollision(
+        unit_x,
+        unit_y,
+        24,
+        22,
+
+        game.vars.playerX,
+        game.vars.playerY,
+        frameWidth,
+        frameHeight
+      )
+    ) die();
   }
 
   // Draw player
