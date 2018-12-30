@@ -1,5 +1,6 @@
 import { GameController } from '../game-controller';
 import { GameStates } from '../game-states.enum';
+import { drawUI } from '../ui';
 
 export function handleStateWindowExit(game: GameController, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const sprites = game.sprites;
@@ -24,5 +25,7 @@ export function handleStateWindowExit(game: GameController, canvas: HTMLCanvasEl
         game.state = GameStates.FALLING;
       }
     }
+
+    drawUI(game, canvas, ctx);
   }
 }

@@ -9,6 +9,7 @@ import { handleStateTitle } from './states/title';
 import { handleStateWindowExit } from './states/window-exit';
 import { handleStateFalling } from './states/falling';
 import { handleStateDead } from './states/dead';
+import { handleStateGameOver } from './states/game-over';
 
 let game: GameController = {
   sprites: null,
@@ -142,8 +143,12 @@ function gameLoop() {
     case GameStates.DEAD:
       handleStateDead(game, canvas, ctx);
       break;
+    case GameStates.GAME_OVER:
+      handleStateGameOver(game, canvas, ctx);
+      break;
   }
 
+  // Continually spawn walls
   if (game.vars.height / 161 > game.vars.leftWalls.length - 1) {
     const configurations = createRandomWallConfigurations();
 
@@ -156,9 +161,11 @@ function gameLoop() {
     );
   }
 
+  // Reset obstacle tracking
   game.vars.flowers = [];
   game.vars.windowUnits = [];
 
+  // Draw walls
   drawWalls(game.vars.height, game.vars.leftWalls, canvas, ctx, true, game);
   drawWalls(game.vars.height, game.vars.rightWalls, canvas, ctx, false, game);
 

@@ -2,6 +2,7 @@ import { GameController } from '../game-controller';
 import { options } from '../options';
 import { GameStates } from '../game-states.enum';
 import { boxCollision } from '../collision';
+import { drawUI } from '../ui';
 
 export function handleStateFalling(game: GameController, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const sprites = game.sprites;
@@ -86,4 +87,6 @@ export function handleStateFalling(game: GameController, canvas: HTMLCanvasEleme
     game.vars.playerX, game.vars.playerY,
     frameWidth, frameHeight
   );
+
+  drawUI(game, canvas, ctx);
 }

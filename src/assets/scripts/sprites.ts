@@ -5,6 +5,7 @@ export interface GameSprites<T> {
   eyeballMagentaSheet?: T;
   fanSheet?: T;
   flower?: T;
+  gameOver?: T;
   heart?: T;
   hiScore?: T;
   logo?: T;
@@ -25,6 +26,7 @@ export const spritePaths: GameSprites<string> = {
   eyeballCyanSheet: require('../images/spr_eyeball_cyan_sheet.png'),
   eyeballMagentaSheet: require('../images/spr_eyeball_magenta_sheet.png'),
   flower: require('../images/spr_flower.png'),
+  gameOver: require('../images/spr_game_over.png'),
   fanSheet: require('../images/spr_fan_sheet.png'),
   heart: require('../images/spr_heart.png'),
   hiScore: require('../images/spr_hi_score.png'),
