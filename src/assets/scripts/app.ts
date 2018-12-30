@@ -43,6 +43,27 @@ let game: GameController = {
 
 window['game'] = game;
 
+function respawn() {
+  game.vars.leftWalls = [];
+  game.vars.rightWalls = [];
+
+  game.vars.leftWalls.push(
+    createWall(false, false, false, true),
+    createWall()
+  );
+
+  game.vars.rightWalls.push(
+    createWall(false, true),
+    createWall()
+  );
+
+  game.vars.playerX = 20;
+  game.vars.playerY = 138;
+  game.vars.hspeed = 0;
+
+  game.vars.height = 0;
+}
+
 async function startGame() {
   game.sprites = await loadSprites(spritePaths);
 
@@ -60,6 +81,10 @@ async function startGame() {
     switch (e.key) {
       case ' ':
         if (game.state === GameStates.TITLE) game.state = GameStates.WINDOW_EXIT;
+        if (game.state === GameStates.DEAD) {
+          respawn();
+          game.state = GameStates.WINDOW_EXIT;
+        }
         break;
       case 'o':
         game.vars.oDown = true;
