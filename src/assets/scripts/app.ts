@@ -2,12 +2,13 @@ import { loadSprites, spritePaths} from './sprites';
 import { GameStates } from './game-states.enum';
 import { canvas, ctx } from './canvas';
 import { GameController } from './game-controller';
-import { createWall, drawWalls } from './walls';
+import { createWall, drawWalls, createRandomWallConfigurations } from './walls';
 
 // State handlers
 import { handleStateTitle } from './states/title';
 import { handleStateWindowExit } from './states/window-exit';
 import { handleStateFalling } from './states/falling';
+import { handleStateDead } from './states/dead';
 
 let game: GameController = {
   sprites: null,
@@ -96,15 +97,20 @@ function gameLoop() {
     case GameStates.FALLING:
       handleStateFalling(game, canvas, ctx);
       break;
+    case GameStates.DEAD:
+      handleStateDead(game, canvas, ctx);
+      break;
   }
 
   if (game.vars.height / 161 > game.vars.leftWalls.length - 1) {
+    const configurations = createRandomWallConfigurations();
+
     game.vars.leftWalls.push(
-      createWall()
+      createWall(...configurations[0])
     );
 
     game.vars.rightWalls.push(
-      createWall()
+      createWall(...configurations[1])
     );
   }
 

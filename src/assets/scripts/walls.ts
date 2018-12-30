@@ -1,5 +1,5 @@
-import { GameController } from "./game-controller";
-import { GameStates } from "./game-states.enum";
+import { GameController } from './game-controller';
+import { choose } from './utils';
 
 export interface Wall {
   hasClothesLine: boolean;
@@ -77,4 +77,22 @@ export function drawWalls(height: number, walls: Wall[], canvas: HTMLCanvasEleme
       );
     }
   });
+}
+
+export function createRandomWallConfigurations() {
+  const obstacleChoices = ['unit', 'flower', 'none'];
+  const sideChoices = ['left', 'right'];
+  const verticalChoices = [true, false];
+
+  const obstacleChoice = choose(obstacleChoices);
+  if (obstacleChoice === 'none') {
+    return [ [], [] ];
+  } else {
+    const sideChoice = choose(sideChoices);
+    const verticalChoice = choose(verticalChoices);
+
+    const obstacleWindowConfig = [obstacleChoice === 'flower', obstacleChoice === 'unit', false, false, verticalChoice];
+
+    return sideChoice === 'left' ? [ obstacleWindowConfig, [] ] : [ [], obstacleWindowConfig ];
+  }
 }
