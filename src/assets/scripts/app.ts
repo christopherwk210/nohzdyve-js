@@ -27,6 +27,7 @@ let game: GameController = {
     playerY: 138,
 
     lives: 3,
+    score: 0,
 
     // Title state vars
     startGameVisible: true,
@@ -64,6 +65,14 @@ function respawn() {
   game.vars.height = 0;
 }
 
+function reset() {
+  respawn();
+  game.vars.logoOpacity = 1;
+  game.vars.startGameVisible = true;
+  game.vars.lives = 3;
+  game.vars.score = 0;
+}
+
 async function startGame() {
   game.sprites = await loadSprites(spritePaths);
 
@@ -80,10 +89,18 @@ async function startGame() {
   window.addEventListener('keydown', e => {
     switch (e.key) {
       case ' ':
-        if (game.state === GameStates.TITLE) game.state = GameStates.WINDOW_EXIT;
-        if (game.state === GameStates.DEAD) {
-          respawn();
-          game.state = GameStates.WINDOW_EXIT;
+        switch (game.state) {
+          case GameStates.TITLE:
+            game.state = GameStates.WINDOW_EXIT;
+            break;
+          case GameStates.DEAD:
+            respawn();
+            game.state = GameStates.WINDOW_EXIT;
+            break;
+          case GameStates.GAME_OVER:
+            reset();
+            game.state = GameStates.TITLE;
+            break;
         }
         break;
       case 'o':
