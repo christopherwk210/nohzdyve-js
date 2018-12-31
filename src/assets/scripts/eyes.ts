@@ -24,7 +24,7 @@ export function handleEyes(game: GameController, canvas: HTMLCanvasElement, ctx:
   } else if (game.vars.eyeTimer > options.eyeballSpawnChanceRate) game.vars.eyeTimer = 0;
 
   game.vars.eyes = game.vars.eyes.filter(eye => {
-    eye.y -= 2;
+    if (game.state === GameStates.FALLING) eye.y -= 2;
 
     if (eye.y < -eyeHeight) {
       return false;

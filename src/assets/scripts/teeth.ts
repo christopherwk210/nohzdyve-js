@@ -21,7 +21,8 @@ export function handleTeeth(game: GameController, canvas: HTMLCanvasElement, ctx
   } else if (game.vars.teethTimer > options.teethSpawnRate) game.vars.teethTimer = 0;
 
   game.vars.teeth = game.vars.teeth.filter(teeth => {
-    teeth.y -= options.teethVspeed;
+    const teethVspeed = game.state === GameStates.FALLING ? options.teethVspeed : options.teethVspeed - 2;
+    teeth.y -= teethVspeed;
 
     if (teeth.y < -teethHeight) {
       return false;

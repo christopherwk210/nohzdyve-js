@@ -12,6 +12,9 @@ import { handleStateFalling } from './states/falling';
 import { handleStateDead } from './states/dead';
 import { handleStateGameOver } from './states/game-over';
 
+let existingHighScore: any = localStorage.getItem('nohzdyve-high-score');
+if (existingHighScore) existingHighScore = parseInt(existingHighScore);
+
 let game: GameController = {
   sprites: null,
   state: GameStates.TITLE,
@@ -30,7 +33,9 @@ let game: GameController = {
 
     lives: 3,
     score: 0,
-    hiscore: 0,
+    hiscore: existingHighScore || 0,
+
+    savedHiscore: false,
 
     // Title state vars
     startGameVisible: true,
@@ -91,6 +96,7 @@ function reset() {
   game.vars.startGameVisible = true;
   game.vars.lives = 3;
   game.vars.score = 0;
+  game.vars.savedHiscore = false;
 }
 
 async function startGame() {
