@@ -3,6 +3,7 @@ import { GameStates } from './game-states.enum';
 import { canvas, ctx } from './canvas';
 import { GameController } from './game-controller';
 import { createWall, drawWalls, createRandomWallConfigurations } from './walls';
+import { options } from './options';
 
 // State handlers
 import { handleStateTitle } from './states/title';
@@ -41,6 +42,12 @@ let game: GameController = {
     hspeed: 0,
     oDown: false,
     pDown: false,
+
+    teeth: [],
+    teethTimer: options.teethSpawnRate - 10,
+
+    eyes: [],
+    eyeTimer: 0,
 
     // Dead vars
     poofFrame: 0

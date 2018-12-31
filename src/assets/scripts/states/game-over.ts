@@ -1,11 +1,13 @@
 import { GameController } from '../game-controller';
 import { drawUI } from '../ui';
 import { drawPoof } from '../poof';
+import { handleTeeth } from '../teeth';
 
 export function handleStateGameOver(game: GameController, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const sprites = game.sprites;
 
   drawPoof(game, ctx);
+  handleTeeth(game, canvas, ctx);
   drawUI(game, canvas, ctx);
 
   ctx.drawImage(

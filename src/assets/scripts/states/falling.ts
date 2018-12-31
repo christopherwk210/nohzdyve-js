@@ -3,6 +3,8 @@ import { options } from '../options';
 import { GameStates } from '../game-states.enum';
 import { boxCollision } from '../collision';
 import { drawUI } from '../ui';
+import { randomBetween, choose } from '../utils';
+import { handleTeeth } from '../teeth';
 
 export function handleStateFalling(game: GameController, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const sprites = game.sprites;
@@ -35,6 +37,8 @@ export function handleStateFalling(game: GameController, canvas: HTMLCanvasEleme
   if (!game.vars.oDown && !game.vars.pDown) {
     game.vars.hspeed = options.idleSpeed * Math.sign(game.vars.hspeed);
   }
+
+  handleTeeth(game, canvas, ctx);
 
   // Calculate X
   game.vars.playerX += game.vars.hspeed;
@@ -70,6 +74,23 @@ export function handleStateFalling(game: GameController, canvas: HTMLCanvasEleme
         unit_y,
         24,
         22,
+
+        game.vars.playerX,
+        game.vars.playerY,
+        frameWidth,
+        frameHeight
+      )
+    ) die();
+  }
+
+  // Collide with teeth
+  for (const teeth of game.vars.teeth) {
+    if (
+      boxCollision(
+        teeth.x,
+        teeth.y,
+        24,
+        20,
 
         game.vars.playerX,
         game.vars.playerY,
