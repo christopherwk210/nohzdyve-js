@@ -5,22 +5,24 @@ import { boxCollision } from '../collision';
 import { drawUI } from '../ui';
 import { handleTeeth } from '../teeth';
 import { handleEyes } from '../eyes';
+import { createPoof, drawPoofs } from '../poof';
 
 export function handleStateFalling(game: GameController, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const sprites = game.sprites;
 
+  // Sprite frame
+  const frameWidth = 20;
+  const frameHeight = 28;
+  const frame = (Math.floor(game.vars.frameCount / 5) % 2) * frameWidth;
+
   function die() {
+    createPoof(game, game.vars.playerX + (frameWidth / 2), game.vars.playerY + (frameHeight / 2));
     if (--game.vars.lives === 0) {
       game.state = GameStates.GAME_OVER;
     } else {
       game.state = GameStates.DEAD;
     }
   }
-
-  // Sprite frame
-  const frameWidth = 20;
-  const frameHeight = 28;
-  const frame = (Math.floor(game.vars.frameCount / 5) % 2) * frameWidth;
 
   // Fall
   game.vars.height += 2;
@@ -118,12 +120,15 @@ export function handleStateFalling(game: GameController, canvas: HTMLCanvasEleme
         frameHeight
       )
     ) {
-      game.vars.eyes = game.vars.eyes.filter((eye, index) => index !== eyeIndex);
+      createPoof(game, eye.x + 8, eye.y + 15);
       game.vars.score += options.eyeballPointValue;
+      game.vars.eyes = game.vars.eyes.filter((eye, index) => index !== eyeIndex);
     }
 
     eyeIndex++;
   }
+
+  drawPoofs(game, ctx);
 
   // Draw player
   ctx.drawImage(

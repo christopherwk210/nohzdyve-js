@@ -1,27 +1,39 @@
 import { GameController } from './game-controller';
+import { GameStates } from './game-states.enum';
 
-export function drawPoof(game: GameController, ctx: CanvasRenderingContext2D) {
-  const sprites = game.sprites;
-  const frame = game.vars.poofFrame;
+export function createPoof(game: GameController, x: number, y: number) {
+  game.vars.poofs.push({
+    x, y,
+    frame: 0,
+    sprite: game.sprites.poof
+  });
+}
 
-  if (frame < 4) {
-    // Sprite frame
-    const frameWidth = 29;
-    const frameHeight = 18;
-    const sx = frame * frameWidth;
+export function drawPoofs(game: GameController, ctx: CanvasRenderingContext2D) {
+  if (!game.vars.poofs.length) return;
 
-    // Player size
-    const playerFrameWidth = 20;
-    const playerFrameHeight = 28;
+  const frameWidth = 29;
+  const frameHeight = 18;
+
+  game.vars.poofs = game.vars.poofs.filter(poof => {
+    if (poof.frame >= 4) return false;
+
+    if (game.state === GameStates.FALLING) {
+      poof.y -= 2;
+    }
 
     ctx.drawImage(
-      sprites.poof,
-      sx, 0,
+      poof.sprite,
+      poof.frame * frameWidth, 0,
       frameWidth, frameHeight,
-      game.vars.playerX - (frameWidth / 2) + (playerFrameWidth / 2), game.vars.playerY - (frameHeight / 2) + (playerFrameHeight / 2),
+      poof.x - (frameWidth / 2), poof.y - (frameHeight / 2),
       frameWidth, frameHeight
     );
 
-    game.vars.poofFrame = game.vars.frameCount % 4 === 0 ? game.vars.poofFrame + 1 : game.vars.poofFrame;
-  }
+    if (game.vars.frameCount % 4 === 0) {
+      poof.frame++;
+    }
+
+    return true;
+  });
 }

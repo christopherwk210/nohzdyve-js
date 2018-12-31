@@ -1,6 +1,6 @@
 import { GameController } from '../game-controller';
 import { drawUI } from '../ui';
-import { drawPoof } from '../poof';
+import { drawPoofs } from '../poof';
 import { handleTeeth } from '../teeth';
 import { handleEyes } from '../eyes';
 
@@ -16,7 +16,7 @@ export function handleStateGameOver(game: GameController, canvas: HTMLCanvasElem
     }
   }
 
-  drawPoof(game, ctx);
+  drawPoofs(game, ctx);
   handleTeeth(game, canvas, ctx);
   handleEyes(game, canvas, ctx);
   drawUI(game, canvas, ctx);

@@ -35,7 +35,7 @@ let game: GameController = {
     score: 0,
     hiscore: existingHighScore || 0,
 
-    savedHiscore: false,
+    poofs: [],
 
     // Title state vars
     startGameVisible: true,
@@ -54,8 +54,8 @@ let game: GameController = {
     eyes: [],
     eyeTimer: options.eyeballSpawnChanceRate - 10,
 
-    // Dead vars
-    poofFrame: 0
+    // Game over vars
+    savedHiscore: false
   }
 };
 
@@ -64,6 +64,9 @@ window['game'] = game;
 function respawn() {
   game.vars.leftWalls = [];
   game.vars.rightWalls = [];
+  game.vars.poofs = [];
+  game.vars.teeth = [];
+  game.vars.eyes = [];
 
   game.vars.leftWalls.push(
     createWall(false, false, false, true),
@@ -80,11 +83,6 @@ function respawn() {
   game.vars.hspeed = 0;
 
   game.vars.height = 0;
-
-  game.vars.poofFrame = 0;
-
-  game.vars.teeth = [];
-  game.vars.eyes = [];
 
   game.vars.teethTimer = options.teethSpawnRate - 10;
   game.vars.eyeTimer = options.eyeballSpawnChanceRate - 10;
