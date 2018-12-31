@@ -59,8 +59,6 @@ let game: GameController = {
   }
 };
 
-window['game'] = game;
-
 function respawn() {
   game.vars.leftWalls = [];
   game.vars.rightWalls = [];

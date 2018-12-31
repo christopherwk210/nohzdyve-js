@@ -4,7 +4,6 @@
 # Parcel
 .cache/
 tmp/
-dist/
 
 # Logs
 logs
