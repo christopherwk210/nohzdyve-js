@@ -39,7 +39,10 @@ let game: GameController = {
     // Falling vars
     hspeed: 0,
     oDown: false,
-    pDown: false
+    pDown: false,
+
+    // Dead vars
+    poofFrame: 0
   }
 };
 
@@ -64,6 +67,8 @@ function respawn() {
   game.vars.hspeed = 0;
 
   game.vars.height = 0;
+
+  game.vars.poofFrame = 0;
 }
 
 function reset() {
