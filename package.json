@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "parcel src/index.html --out-dir=tmp",
-    "build": "parcel build src/index.html --out-dir=dist --public-url='./'"
+    "build": "parcel build src/index.html --out-dir=dist --public-url='./'",
+    "upload": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
   "author": "",

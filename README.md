@@ -1,7 +1,17 @@
-# Nohzdyve
+<h1 align="center">Nohzdyve</h1>
+<p align="center">
+  <img src="./game.gif" alt="JS port of Nohzdyve">
+</p>
+<p align="center">JS port of Nohzdyve</p>
 
-Under construction. HTML5 port of the game [Nohzdyve](https://tuckersoft.net/ealing20541/nohzdyve/).
+Web port of the game [Nohzdyve](https://tuckersoft.net/ealing20541/nohzdyve/). Play it [here](https://christopherwk210.github.io/nohzdyve-js/).
+
+Still left to implement:
+
+- Sounds
+- Clotheslines
+- Player height variation
 
 Original game by Colin Ritman & Tuckersoft. All rights reserved.
 
-┌┴┐
+<p align="center">┌┴┐</p>
