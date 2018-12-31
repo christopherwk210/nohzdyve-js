@@ -21,18 +21,19 @@ export function handleTeeth(game: GameController, canvas: HTMLCanvasElement, ctx
   } else if (game.vars.teethTimer > options.teethSpawnRate) game.vars.teethTimer = 0;
 
   game.vars.teeth = game.vars.teeth.filter(teeth => {
-    if (teeth.x + teeth.hspeed < sprites.wallLeft.width) {
-      teeth.hspeed = Math.abs(teeth.hspeed);
-    } else if (teeth.x + teeth.hspeed > canvas.width - sprites.wallRight.width - teethWidth) {
-      teeth.hspeed = Math.abs(teeth.hspeed) * -1;
-    }
-
-    teeth.x += teeth.hspeed;
     teeth.y -= options.teethVspeed;
 
     if (teeth.y < -teethHeight) {
       return false;
     } else {
+      if (teeth.x + teeth.hspeed < sprites.wallLeft.width) {
+        teeth.hspeed = Math.abs(teeth.hspeed);
+      } else if (teeth.x + teeth.hspeed > canvas.width - sprites.wallRight.width - teethWidth) {
+        teeth.hspeed = Math.abs(teeth.hspeed) * -1;
+      }
+  
+      teeth.x += teeth.hspeed;
+      
       const frame = (Math.floor(game.vars.frameCount / 5) % 2) * teethWidth;
       ctx.drawImage(
         teeth.sprite,

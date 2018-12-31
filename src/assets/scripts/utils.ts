@@ -3,5 +3,5 @@ export function choose<T>(arr: T[]): T {
 }
 
 export function randomBetween(low: number, high: number) {
-  return Math.floor(Math.random() * high) + low;
+  return Math.floor(Math.random() * (high - low + 1)) + low;
 }

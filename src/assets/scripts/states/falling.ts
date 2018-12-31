@@ -3,8 +3,8 @@ import { options } from '../options';
 import { GameStates } from '../game-states.enum';
 import { boxCollision } from '../collision';
 import { drawUI } from '../ui';
-import { randomBetween, choose } from '../utils';
 import { handleTeeth } from '../teeth';
+import { handleEyes } from '../eyes';
 
 export function handleStateFalling(game: GameController, canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) {
   const sprites = game.sprites;
@@ -38,7 +38,9 @@ export function handleStateFalling(game: GameController, canvas: HTMLCanvasEleme
     game.vars.hspeed = options.idleSpeed * Math.sign(game.vars.hspeed);
   }
 
+  // Spawn stuffs
   handleTeeth(game, canvas, ctx);
+  handleEyes(game, canvas, ctx);
 
   // Calculate X
   game.vars.playerX += game.vars.hspeed;
@@ -98,6 +100,29 @@ export function handleStateFalling(game: GameController, canvas: HTMLCanvasEleme
         frameHeight
       )
     ) die();
+  }
+
+  // Collide with eyes
+  let eyeIndex = 0;
+  for (const eye of game.vars.eyes) {
+    if (
+      boxCollision(
+        eye.x,
+        eye.y,
+        16,
+        31,
+
+        game.vars.playerX,
+        game.vars.playerY,
+        frameWidth,
+        frameHeight
+      )
+    ) {
+      game.vars.eyes = game.vars.eyes.filter((eye, index) => index !== eyeIndex);
+      game.vars.score += options.eyeballPointValue;
+    }
+
+    eyeIndex++;
   }
 
   // Draw player

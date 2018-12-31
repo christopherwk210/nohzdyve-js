@@ -4,5 +4,12 @@ export const options = {
 
   teethSpawnRate: 140,
   teethHspeed: 2,
-  teethVspeed: 3
+  teethVspeed: 3,
+
+  eyeballSpawnChanceRate: 80,
+  eyeballPadding: 30,
+  eyeballHspeed: 1,
+  eyeballTurnAroundTime: 20,
+
+  eyeballPointValue: 10
 };

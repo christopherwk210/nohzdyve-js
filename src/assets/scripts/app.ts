@@ -47,7 +47,7 @@ let game: GameController = {
     teethTimer: options.teethSpawnRate - 10,
 
     eyes: [],
-    eyeTimer: 0,
+    eyeTimer: options.eyeballSpawnChanceRate - 10,
 
     // Dead vars
     poofFrame: 0
@@ -77,6 +77,12 @@ function respawn() {
   game.vars.height = 0;
 
   game.vars.poofFrame = 0;
+
+  game.vars.teeth = [];
+  game.vars.eyes = [];
+
+  game.vars.teethTimer = options.teethSpawnRate - 10;
+  game.vars.eyeTimer = options.eyeballSpawnChanceRate - 10;
 }
 
 function reset() {
