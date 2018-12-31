@@ -29,6 +29,7 @@ let game: GameController = {
 
     lives: 3,
     score: 0,
+    hiscore: 0,
 
     // Title state vars
     startGameVisible: true,
@@ -135,24 +136,6 @@ async function startGame() {
 function gameLoop() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  switch (game.state) {
-    case GameStates.TITLE:
-      handleStateTitle(game, canvas, ctx);
-      break;
-    case GameStates.WINDOW_EXIT:
-      handleStateWindowExit(game, canvas, ctx);
-      break;
-    case GameStates.FALLING:
-      handleStateFalling(game, canvas, ctx);
-      break;
-    case GameStates.DEAD:
-      handleStateDead(game, canvas, ctx);
-      break;
-    case GameStates.GAME_OVER:
-      handleStateGameOver(game, canvas, ctx);
-      break;
-  }
-
   // Continually spawn walls
   if (game.vars.height / 161 > game.vars.leftWalls.length - 1) {
     const configurations = createRandomWallConfigurations();
@@ -173,6 +156,24 @@ function gameLoop() {
   // Draw walls
   drawWalls(game.vars.height, game.vars.leftWalls, canvas, ctx, true, game);
   drawWalls(game.vars.height, game.vars.rightWalls, canvas, ctx, false, game);
+
+  switch (game.state) {
+    case GameStates.TITLE:
+      handleStateTitle(game, canvas, ctx);
+      break;
+    case GameStates.WINDOW_EXIT:
+      handleStateWindowExit(game, canvas, ctx);
+      break;
+    case GameStates.FALLING:
+      handleStateFalling(game, canvas, ctx);
+      break;
+    case GameStates.DEAD:
+      handleStateDead(game, canvas, ctx);
+      break;
+    case GameStates.GAME_OVER:
+      handleStateGameOver(game, canvas, ctx);
+      break;
+  }
 
   game.vars.frameCount++;
   requestAnimationFrame(gameLoop);

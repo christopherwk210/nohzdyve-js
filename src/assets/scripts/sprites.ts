@@ -9,6 +9,8 @@ export interface GameSprites<T> {
   heart?: T;
   hiScore?: T;
   logo?: T;
+  numbersGreen?: T;
+  numbersMagenta?: T;
   playerDyvingSheet?: T;
   playerJump?: T;
   poof?: T;
@@ -32,6 +34,8 @@ export const spritePaths: GameSprites<string> = {
   heart: require('../images/spr_heart.png'),
   hiScore: require('../images/spr_hi_score.png'),
   logo: require('../images/spr_logo.png'),
+  numbersGreen: require('../images/spr_numbers_green_sheet.png'),
+  numbersMagenta: require('../images/spr_numbers_magenta_sheet.png'),
   playerDyvingSheet: require('../images/spr_player_dyving_sheet.png'),
   playerJump: require('../images/spr_player_jump.png'),
   poof: require('../images/spr_poof_sheet.png'),
