@@ -47,6 +47,21 @@ export function handleStateFalling(game: GameController, canvas: HTMLCanvasEleme
   // Calculate X
   game.vars.playerX += game.vars.hspeed;
 
+  // Calculate Y
+  if (game.vars.playerY > options.playerHeightVariationBottom) {
+    game.vars.targetVspeed = Math.abs(game.vars.targetVspeed) * -1;
+  } else if (game.vars.playerY < options.playerHeightVariationTop) {
+    game.vars.targetVspeed = Math.abs(game.vars.targetVspeed);
+  }
+
+  if (game.vars.vspeed < game.vars.targetVspeed) {
+    game.vars.vspeed += 0.05;
+  } else if (game.vars.vspeed > game.vars.targetVspeed) {
+    game.vars.vspeed -= 0.05;
+  }
+
+  game.vars.playerY += game.vars.vspeed;
+
   // Collide with walls
   const leighway = 1;
   if (game.vars.playerX < game.sprites.wallLeft.width - leighway || game.vars.playerX > canvas.width - game.sprites.wallRight.width - frameWidth + leighway) {

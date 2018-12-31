@@ -45,6 +45,8 @@ let game: GameController = {
 
     // Falling vars
     hspeed: 0,
+    vspeed: options.vSpeed,
+    targetVspeed: options.vSpeed,
     oDown: false,
     pDown: false,
 
@@ -79,6 +81,8 @@ function respawn() {
   game.vars.playerX = 20;
   game.vars.playerY = 138;
   game.vars.hspeed = 0;
+  game.vars.vspeed = options.vSpeed;
+  game.vars.targetVspeed = options.vSpeed;
 
   game.vars.height = 0;
 
