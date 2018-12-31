@@ -10,7 +10,8 @@ Still left to implement:
 
 - Sounds
 - Clotheslines
-- Player height variation
+- All teeth colors
+- All eyeball colors
 
 Original game by Colin Ritman & Tuckersoft. All rights reserved.
 
