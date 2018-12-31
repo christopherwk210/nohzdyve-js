@@ -15,4 +15,4 @@ Still left to implement:
 
 Original game by Colin Ritman & Tuckersoft. All rights reserved.
 
-<p align="center">┌┴┐</p>
+`┌┴┐`
